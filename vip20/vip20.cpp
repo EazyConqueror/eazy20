@@ -242,16 +242,22 @@ dns:
   fake-ip-range: 198.18.0.1/16
 proxies:
   - name: ssr1
-    server: frt1.sshocean.net
-    port: 8080
-    type: trojan
-    password: "e16156d9-f5cf-41f5-894d-ffec8652e793"
-    network: grpc
-    skip-cert-verify: true
+    type: vmess
+    server: vmess-ovh-fr01.globalssh.xyz
+    port: 80
+    uuid: def29317-c086-4292-9e8f-23da8bf8a5c4
+    alterId: 0
+    cipher: auto
     udp: true
-    grpc-opts:
-     grpc-mode: gun
-     grpc-service-name: "grpc"
+    network: http
+    http-opts:
+      method: "GET"
+      path:
+        - '/vmess-tcp'
+        - '/video'
+      headers:
+        Connection:
+          - keep-alive
 proxy-groups:
   - name: gameTLS
     type: url-test
