@@ -243,20 +243,17 @@ dns:
 proxies:
   - name: ssr1
     type: vmess
-    server: vmess-ovh-fr01.globalssh.xyz
-    port: 80
-    uuid: def29317-c086-4292-9e8f-23da8bf8a5c4
+    server: gr.alw9lat.com
+    port: 47959
+    uuid: dd769fb6-7fff-4af9-8a88-8655ce3a4fe2
     alterId: 0
     cipher: auto
-    udp: true
-    network: http
-    http-opts:
-      method: "GET"
-      path:
-        - '/vmess-tcp'
-      headers:
-        Connection:
-          - keep-alive
+    network: h2
+    tls: true
+    h2-opts:
+      host:
+        - google.com
+      path: /
 proxy-groups:
   - name: gameTLS
     type: url-test
