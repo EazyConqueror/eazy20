@@ -254,7 +254,6 @@ proxies:
       method: "GET"
       path:
         - '/vmess-tcp'
-        - '/video'
       headers:
         Connection:
           - keep-alive
