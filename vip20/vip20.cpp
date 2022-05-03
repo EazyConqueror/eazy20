@@ -242,33 +242,16 @@ dns:
   fake-ip-range: 198.18.0.1/16
 proxies:
   - name: ssr1
-    type: vmess
-    server: s.eazyconqueror.tk
-    port: 95
-    uuid: f670c0f4-4c90-475d-b7d5-52bf9be07414
-    alterId: 0
-    cipher: auto
-    udp: true
-    servername: example.com
-    network: ws
-    ws-opts:
-      path: /v2rayws
-      headers:
-        Host: v2ray.com
-  - name: ssr2
-    server: s.eazyconqueror.tk
-    port: 2099
-    type: vmess
-    uuid: 9f960282-6b50-4d74-a754-0baacd2e820d
-    alterId: 0
-    cipher: auto
+    server: frt1.sshocean.net
+    port: 8080
+    type: trojan
+    password: "e16156d9-f5cf-41f5-894d-ffec8652e793"
     network: grpc
-    tls: true
-    udp: true
-    servername: example.com
     skip-cert-verify: true
+    udp: true
     grpc-opts:
-      grpc-service-name: scvps
+     grpc-mode: gun
+     grpc-service-name: "grpc"
 proxy-groups:
   - name: gameTLS
     type: url-test
@@ -277,16 +260,12 @@ proxy-groups:
     tolerance: 50
     proxies:
       - ssr1
-  - name: gameHTTP
-    type: select
-    proxies:
-      - ssr2
 rules:
-  - DST-PORT,9030,gameHTTP
-  - DST-PORT,9031,gameHTTP
-  - DST-PORT,20000,gameHTTP
-  - DST-PORT,20001,gameHTTP
-  - DST-PORT,20002,gameHTTP
+ # - DST-PORT,9030,gameHTTP
+ # - DST-PORT,9031,gameHTTP
+ # - DST-PORT,20000,gameHTTP
+ # - DST-PORT,20001,gameHTTP
+ # - DST-PORT,20002,gameHTTP
   - DOMAIN,www.pubgmobile.com,gameTLS
   - DOMAIN,dl.listdl.com,gameTLS
   - DOMAIN,crl3.digicert.com,gameTLS
