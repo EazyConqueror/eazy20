@@ -242,26 +242,30 @@ dns:
   fake-ip-range: 198.18.0.1/16
 proxies:
   - name: ssr1
-    server: gr.alw9lat.com
-    port: 38321
     type: vmess
-    uuid: daab5f3b-cade-4855-f7f4-564c59c4a4d6
+    server: gr.alw9lat.com
+    port: 47959
+    uuid: dd769fb6-7fff-4af9-8a88-8655ce3a4fe2
     alterId: 0
     cipher: auto
-    network: grpc
+    network: h2
     tls: true
-    servername: gr.alw9lat.com
-    skip-cert-verify: false
-    grpc-opts:
-      grpc-service-name: "vip"
+    h2-opts:
+      host:
+        - google.com
+      path: /
 proxy-groups:
   - name: gameTLS
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    tolerance: 50
+    type: select
+    disable-udp: true
     proxies:
       - ssr1
+  - name: en1
+    type: select
+    interface-name: en1
+    routing-mark: 6667
+    proxies:
+      - DIRECT 
 rules:
  # - DST-PORT,9030,gameHTTP
  # - DST-PORT,9031,gameHTTP
@@ -304,7 +308,7 @@ rules:
   - IP-CIDR,49.0.0.0/8,gameTLS
   - IP-CIDR,20.0.0.0/8,gameTLS
   - GEOIP,CN,gameTLS
-  - MATCH,DIRECT
+  - MATCH,en1
 tun:
   enable: true
   stack: system
