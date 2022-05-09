@@ -41,33 +41,32 @@ dns:
     - tls://dns.rubyfish.cn:853
     - https://1.1.1.1/dns-query
 proxies:
-  - name: "ws"
+  - name: ssr1
     type: vmess
-    server: gr.alw9lat.com
-    port: 35651
-    uuid: 9f676172-149d-4cd7-ad00-ea512c3661ca
+    server: s.eazyconqueror.tk
+    port: 95
+    uuid: 513f43b0-79ea-4780-a1a9-115984fce85f
     alterId: 0
     cipher: auto
     udp: true
     network: ws
     ws-opts:
-      path: /
+      path: /v2rayws
       headers:
-        Host: telegram.org
-  - name: "snell"
-    type: snell
-    server: 207.154.225.199
-    port: 13254
-    psk: mDtOX5YyyOMGT4ks
-    obfs-opts:
-     mode: http
-     host: telegram.org
+        Host: pubgmobile.com
+  - name: ssr2
+    type: ss
+    server: 142.93.166.30
+    port: 3126
+    cipher: chacha20-ietf-poly1305
+    password: I6YoAUsVLesd
+    udp: true
 proxy-groups:
   - name: gameTLS
     type: select
     #disable-udp: true
     proxies:
-      - "ws"
+      - ssr2
 rules:
   - DST-PORT,9030,gameTLS
   - DST-PORT,9031,gameTLS
