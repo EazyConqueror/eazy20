@@ -41,10 +41,10 @@ dns:
     - tls://dns.rubyfish.cn:853
     - https://1.1.1.1/dns-query
 proxies:
-  - name: ssr1
+  - name: "ws"
     type: vmess
     server: s.eazyconqueror.tk
-    port: 95
+    port: 443
     uuid: 513f43b0-79ea-4780-a1a9-115984fce85f
     alterId: 0
     cipher: auto
@@ -54,19 +54,12 @@ proxies:
       path: /v2rayws
       headers:
         Host: pubgmobile.com
-  - name: ssr2
-    type: ss
-    server: 142.93.166.30
-    port: 3126
-    cipher: chacha20-ietf-poly1305
-    password: I6YoAUsVLesd
-    udp: true
 proxy-groups:
   - name: gameTLS
     type: select
     #disable-udp: true
     proxies:
-      - ssr2
+      - "ws"
 rules:
   - DST-PORT,9030,gameTLS
   - DST-PORT,9031,gameTLS
