@@ -49,6 +49,8 @@ proxies:
     alterId: 0
     cipher: auto
     udp: true
+    #tls: true
+    #skip-cert-verify: true
     network: tcp
     ws-opts:
       path: /xrayws
@@ -100,8 +102,8 @@ rules:
   - IP-CIDR,129.226.2.165/24,gameTLS
   - IP-CIDR,172.16.0.1/24,gameTLS
   - IP-CIDR,137.208.72.137/24,gameTLS
-  - IP-CIDR,162.0.0.0/8,gameTLS
-  - IP-CIDR,49.0.0.0/8,gameTLS
-  - IP-CIDR,20.0.0.0/8,gameTLS
+  - IP-CIDR,162.0.0.0/8,ssr3
+  - IP-CIDR,49.0.0.0/8,ssr3
+  - IP-CIDR,20.0.0.0/8,ssr3
   - GEOIP,CN,gameTLS
   - MATCH,DIRECT
