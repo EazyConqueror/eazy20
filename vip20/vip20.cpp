@@ -61,7 +61,6 @@ proxy-groups:
     interval: 50
     tolerance: 30
     proxies:
-      - ssr3
       - "ws"
 rules:
   - DST-PORT,9030,gameTLS
