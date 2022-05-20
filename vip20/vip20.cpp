@@ -45,25 +45,15 @@ proxies:
     type: vmess
     server: it.eazyconqueror.tk
     port: 95
-    uuid: 81a14e79-6d37-412b-a03b-502b975c70de
+    uuid: 0baf118e-2fdb-461a-a5c0-a37135610b26
     alterId: 0
     cipher: auto
     udp: true
-    #tls: true
-    skip-cert-verify: true
-    network: ws
+    network: tcp
     ws-opts:
       path: /xrayws
       headers:
         Host: it.eazyconqueror.tk
-
-  - name: ssr3
-    type: ss
-    server: 35.152.59.94
-    port: 30867
-    cipher: chacha20-ietf-poly1305
-    password: lVWuFZDDyjHi
-    udp: true
 proxy-groups:
   - name: gameTLS
     type: url-test
