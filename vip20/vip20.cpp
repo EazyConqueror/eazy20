@@ -1,75 +1,53 @@
-port: 7890
-socks-port: 7891
-redir-port: 7892
-tproxy-port: 7895
-mixed-port: 7893
-allow-lan: true
-mode: rule
-log-level: info
-ipv6: false
-external-controller: 0.0.0.0:9090
-dns:
-  enable: true
-  ipv6: false
-  enhanced-mode: fake-ip
-  listen: 0.0.0.0:7874
-  default-nameserver:
-    - 114.114.114.114
-    - 119.29.29.29
-    - 9.9.9.9
-    - 8.8.8.8
-    - 8.8.4.4
-    - 1.1.1.1
-    - 1.0.0.1
-  nameserver:
-    - 114.114.114.114
-    - 119.29.29.29
-    - 9.9.9.9
-    - 8.8.8.8
-    - 8.8.4.4
-    - 1.1.1.1
-    - 1.0.0.1
-    - https://dns.adguard.com/dns-query
-    - https://dns.google/dns-query
-    - tls://dns.adguard.com
-    - tls://dns.google
-  fallback:
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
-    - https://1.1.1.1/dns-query
-    - tls://8.8.8.8:853
-    - tls://dns.rubyfish.cn:853
-    - https://1.1.1.1/dns-query
 proxies:
   - name: "ws"
     type: vmess
-    server: it.eazyconqueror.tk
-    port: 95
-    uuid: 0baf118e-2fdb-461a-a5c0-a37135610b26
+    server: fr1.v2rayserv.com
+    port: 80
+    uuid: b431bac8-3914-4978-bc9e-eeaec1d6ebf3
     alterId: 0
     cipher: auto
     udp: true
     #tls: true
     #skip-cert-verify: true
-    network: tcp
+    network: ws
     ws-opts:
-      path: /xrayws
+      path: /sshocean
       headers:
-        Host: it.eazyconqueror.tk
+        Host: fr1.v2rayserv.com
+  - name: ss
+    type: ss
+    server: 35.152.59.94
+    port: 30867
+    cipher: chacha20-ietf-poly1305
+    password: lVWuFZDDyjHi
+    udp: true
+
+  - name: ssr
+    type: ssr
+    server: 35.152.59.94
+    port: 1443
+    udp: true
+    cipher: aes-256-cfb
+    password: vip
+    obfs: tls1.2_ticket_auth
+    protocol: auth_sha1_v4
+    obfs-param: domain.tld
+    protocol-param: "2"
 proxy-groups:
   - name: gameTLS
     type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 50
-    tolerance: 30
     proxies:
-      - "ws"
+      - ssr
+    tolerance: 150
+    lazy: true
+    url: 'http://www.gstatic.com/generate_204'
+    interval: 300
 rules:
-  - DST-PORT,9030,gameTLS
-  - DST-PORT,9031,gameTLS
-  - DST-PORT,20000,gameTLS
-  - DST-PORT,20001,gameTLS
-  - DST-PORT,20002,gameTLS
+  - DST-PORT,9030,ss
+  - DST-PORT,9031,ss
+  - DST-PORT,20000,ss
+  - DST-PORT,20001,ss
+  - DST-PORT,20002,ss
   - DOMAIN,www.pubgmobile.com,gameTLS
   - DOMAIN,dl.listdl.com,gameTLS
   - DOMAIN,crl3.digicert.com,gameTLS
@@ -88,7 +66,7 @@ rules:
   - DOMAIN-SUFFIX,adjust.com,gameTLS
   - DOMAIN-SUFFIX,amsoveasea.com,gameTLS
   - DOMAIN-SUFFIX,gcloudsdk.com,gameTLS
-  - DOMAIN-SUFFIX,gjacky.com,gameTLS
+  - DOMAIN-SUFFIX,gjacky.com,DIRECT
   - DOMAIN-SUFFIX,anticheatexpert.com,gameTLS
   - DOMAIN-SUFFIX,onezapp.com,gameTLS
   - DOMAIN-SUFFIX,qcloud.com,gameTLS
@@ -97,6 +75,7 @@ rules:
   - DOMAIN-SUFFIX,gvt1.com,gameTLS
   - DOMAIN-SUFFIX,igamecj.com,gameTLS
   - DOMAIN-SUFFIX,qq.com,gameTLS
+  - DOMAIN-SUFFIX,www.meter.net,gameTLS
   - DOMAIN-SUFFIX,gcloudcs.com,gameTLS
   - IP-CIDR,203.205.239.243/24,gameTLS
   - IP-CIDR,129.226.2.165/24,gameTLS
